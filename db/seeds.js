@@ -1,7 +1,8 @@
 var mongoose = require('mongoose'),
         conn = mongoose.connect('mongodb://localhost/HCA-app'),
-        Team = require("../models/team");
-        Event = require("../models/event");
+        Team = require("../models/team"),
+        Event = require("../models/event"),
+        User = require("../models/user");
 
 Team.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
@@ -9,6 +10,10 @@ Team.remove({}, function(err){
 
 
 Event.remove({}, function(err){
+  if (err) console.log("ERROR: ", err);
+});
+
+User.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
 
@@ -63,7 +68,8 @@ var teams = [
   name: "Bulls",
   league: "NBA",
   origin: "Chicago",
-  logo: "http://content.sportslogos.net/logos/6/221/thumbs/hj3gmh82w9hffmeh3fjm5h874.gif"
+  logo: "http://content.sportslogos.net/logos/6/221/thumbs/hj3gmh82w9hffmeh3fjm5h874.gif",
+  // events: this.name._id
   },
   {
   name: "Hornets",
@@ -79,6 +85,21 @@ var teams = [
   }
 ];
 
+var users = [
+  {
+    email: "howellwho@gmail.com",
+    about: "Cool guyyyyy",
+    picture: "",
+    favorites: "Bulls"
+  },
+  {
+    email: "derek@champas.com",
+    about: "Oakland babyyyy",
+    picture: "",
+    favorites: "Bulls"
+  }
+]
+
 Event.create(events, function(err, events){
   if (err) {
     console.log(err);
@@ -92,7 +113,14 @@ Team.create(teams, function(err, teams){
     console.log(err);
   } else {
     console.log("created: ", teams);
+  }
+});
+
+User.create(users, function(err, users){
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("created: ", users);
     mongoose.connection.close();
   }
-
 });
