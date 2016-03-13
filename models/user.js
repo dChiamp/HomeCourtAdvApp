@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Team = require('../models/team')
+// var Team = require('../models/team')
 
 var UserSchema = new Schema ({
     email: String,
