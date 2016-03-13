@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Event = require('../models/event')
+// var Event = require('../models/event')
 
 var TeamSchema = new Schema ({
   name: String,
