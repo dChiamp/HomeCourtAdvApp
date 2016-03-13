@@ -10,8 +10,9 @@ console.log(teamsController);
 
 router.route('/')
   .get(teamsController.index);
-
-
+//team routes
+router.route('/teams/:id')
+  .get(teamsController.showTeam);
 // router.route('/teams')
 //   .get(teamsController.index);
 
