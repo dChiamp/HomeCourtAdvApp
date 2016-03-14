@@ -23,4 +23,12 @@ router.route('/users')
   .get(usersController.index);
   // .get(usersController)
 
+router.route('/users/:id')
+  .get(usersController.showUser)
+
+router.route('/users/:id/edit')
+  .get(usersController.edit)
+  // .patch(usersController.update),
+  .delete(usersController.delete);
+
 module.exports = router;
