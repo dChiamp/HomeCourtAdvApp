@@ -5,7 +5,9 @@ var BarSchema = new Schema({
   name: String,
   address: String,
   city: String,
-  state: String
+  state: String,
+  lat: Number,
+  long: Number
 }) 
 
 var Bar = mongoose.model('Bar', BarSchema);
