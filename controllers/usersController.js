@@ -1,6 +1,10 @@
 var User = require('../models/user');
 
 var usersController = {
+  // check if user is logged in
+  checkLogInStatus: function (req, res) {
+    res.render('index', {user: req.user});
+  },
   index: function (req, res) {
     User.find({},function(err, users) {
       err ? console.log(err): res.json(users);
@@ -27,7 +31,7 @@ var usersController = {
       } else {
         res.json({data});
         // res.redirect('/users/', _id);
-      }    
+      }
     });
   },
   edit: function (req, res) {
@@ -40,10 +44,12 @@ var usersController = {
   update: function(req, res) {
     var id = req.params.id;
     // get changes to form
+
     var about = req.body.about;
     var picture = req.body.picture;
     var favorites = req.body.favorites;
-    // update 
+    // update
+
     User.find({_id: id}, function(err, user){
       if (err) console.log(err);
       if (about) user.about = about;
