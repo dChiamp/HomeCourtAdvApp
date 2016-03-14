@@ -25,14 +25,14 @@ router.route('/teams/:id')
 
 // USER routes // signup could just be edit
 router.route('/users')
-  .get(usersController.index)
+  .get(usersController.index);
 
 router.route('/users/new')
   .get(usersController.signUp)
   .post(usersController.create);
 
 router.route('/users/:id')
-  .get(usersController.showUser)
+  .get(usersController.showUser);
 
 router.route('/users/:id/edit')
   .get(usersController.edit)
@@ -41,7 +41,7 @@ router.route('/users/:id/edit')
 
 // BAR routes
 router.route('/bars')
-  .get(barsController.index)
+  .get(barsController.index);
 
 router.route('/bars/:id')
   .get(barsController.showBar);
