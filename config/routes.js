@@ -4,6 +4,8 @@ var router = express.Router();
 // require our controllers
 var teamsController = require('../controllers/teamsController');
 var usersController = require('../controllers/usersController');
+var barsController = require('../controllers/barsController');
+
 console.log(teamsController);
 /* GET home page. */
 // router.get('/', function(req, res, next) {
@@ -36,5 +38,12 @@ router.route('/users/:id/edit')
   .get(usersController.edit)
   .put(usersController.update)
   .delete(usersController.remove);
+
+// BAR routes
+router.route('/bars')
+  .get(barsController.index)
+
+router.route('/bars/:id')
+  .get(barsController.showBar);
 
 module.exports = router;
