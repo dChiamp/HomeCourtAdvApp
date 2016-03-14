@@ -6,7 +6,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var mongoose = require('mongoose');
+
 var passport = require('passport');
+
+var methodOverride = require('method-override');
+
 mongoose.connect('mongodb://localhost/HCA-app');
 process.on('exit', function(){mongoose.disconnect();});
 
