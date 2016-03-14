@@ -16,10 +16,12 @@ router.route('/')
   .get(teamsController.index);
 
 // TEAM routes
-router.route('/teams/:id')
-  .get(teamsController.showTeam);
 // router.route('/teams')
 //   .get(teamsController.index);
+
+router.route('/teams/:id')
+  .get(teamsController.showTeam);
+  
 
 // USER routes // signup could just be edit
 router.route('/users')
