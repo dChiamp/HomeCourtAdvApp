@@ -16,3 +16,19 @@ body {
 .center {
 	text-align: center;
 }
+
+
+/*google maps styling*/
+
+#bars-explain {
+	text-align: center;
+}
+
+#map {
+	width:800px;
+	height:500px;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
