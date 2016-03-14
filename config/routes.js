@@ -29,6 +29,6 @@ router.route('/users/:id')
 router.route('/users/:id/edit')
   .get(usersController.edit)
   // .patch(usersController.update),
-  .delete(usersController.delete);
+  // .delete(usersController.delete);
 
 module.exports = router;

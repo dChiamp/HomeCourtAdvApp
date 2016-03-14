@@ -13,31 +13,32 @@ var usersController = {
     })
   },
   edit: function (req, res) {
+    res.render("/users/signup")
     var id = req.params.id
     User.find({_id: id}, function(err, user){
       err ? console.log(err) : res.json({user});
     })
 
-    var about = req.body.about
-    var picture = req.body.picture
-    var favorites = req.body.favorites
+    // var about = req.body.about
+    // var picture = req.body.picture
+    // var favorites = req.body.favorites
+    //
+    // User.find({_id: id}, function(err, user){
+    //   if (err) console.log(err);
+    //   if (about) user.about = about;
+    //   if (picture) user.picture = picture;
+    //   if  (favorites) user.favorites = favorites
+    // })
 
-    User.find({_id: id}, function(err, user){
-      if (err) console.log(err);
-      if (about) user.about = about;
-      if (picture) user.picture = picture;
-      if  (favorites) user.favorites = favorites
-    })
-
-    User.save({id}, function(err, data){
-      console.log(err)
-    })
+    // User.save({id}, function(err, data){
+    //   console.log(err)
+    // })
 
   },
-    // patch: function(req,res) {}
+    // update: function(req,res) {}
   delete: function(req, res) {
     var id = req.params.id
-    User.delete(id, function(err, data){
+    User.remove({_id: id}, function(err, data){
       if (err) console.log(err);
     })
   }
