@@ -2,20 +2,24 @@ var mongoose = require('mongoose'),
         conn = mongoose.connect('mongodb://localhost/HCA-app'),
         Team = require("../models/team"),
         Event = require("../models/event"),
-        User = require("../models/user");
+        User = require("../models/user"),
+        Bar = require("../models/bar");
 
-Team.remove({}, function(err){
+Event.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
 
-
-Event.remove({}, function(err){
+Team.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
 
 User.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
+
+Bar.remove({}, function(err){
+  if (err) console.log("ERROR: ", err);
+})
 
 var events = [
   {
@@ -62,7 +66,6 @@ var events = [
   }
 ];
 
-
 var teams = [
   {
   name: "Bulls",
@@ -98,7 +101,22 @@ var users = [
     picture: "",
     favorites: "Bulls"
   }
-]
+];
+
+var bars = [
+  {
+    name: "beer garden",
+    address: "225 bush st",
+    city: "SF",
+    state: "CA"
+  },
+    {
+    name: "fear garden",
+    address: "666 death ave",
+    city: "Oakland",
+    state: "CA"
+  }
+];
 
 Event.create(events, function(err, events){
   if (err) {
@@ -121,6 +139,14 @@ User.create(users, function(err, users){
     console.log(err);
   } else {
     console.log("created: ", users);
-    mongoose.connection.close();
   }
 });
+
+Bar.create(bars, function(err, bars){
+    if (err) {
+    console.log(err);
+  } else {
+    console.log("created: ", bars);
+    mongoose.connection.close();
+  }
+})
