@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Team = require('../models/team')
+// var Team = require('../models/team');
 
 var EventSchema = new Schema ({
   homeTeam: String,
@@ -15,11 +15,11 @@ var EventSchema = new Schema ({
   // }]
   date: Date,
   time: String,
-  createdAt: { type : Date, default: Date.now() },
+  createdAt: { type : Date, default: Date.now() }
   // add after we create models
   // events: [{ref: 'Event'}]
   // bars: [{ref: 'Bar'}]
-})
+});
 
 var Event = mongoose.model('Event', EventSchema);
 module.exports = Event;

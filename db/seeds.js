@@ -7,7 +7,6 @@ Team.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
 
-
 Event.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
@@ -57,7 +56,6 @@ var events = [
   }
 ];
 
-
 var teams = [
   {
   name: "Bulls",
@@ -91,8 +89,7 @@ Team.create(teams, function(err, teams){
   if (err) {
     console.log(err);
   } else {
-    console.log("created: ", teams);
+    console.log("create: ", teams);
     mongoose.connection.close();
   }
-
 });
