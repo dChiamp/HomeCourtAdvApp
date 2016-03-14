@@ -11,16 +11,30 @@ console.log(teamsController);
 //   res.render('index');
 // });
 
+// homepage routes
 router.route('/')
   .get(teamsController.index);
-//team routes
+
+// TEAM routes
 router.route('/teams/:id')
   .get(teamsController.showTeam);
 // router.route('/teams')
 //   .get(teamsController.index);
-//user routes
+
+// USER routes // signup could just be edit
 router.route('/users')
-  .get(usersController.index);
-  // .get(usersController)
+  .get(usersController.index)
+
+router.route('/users/new')
+  .get(usersController.signUp)
+  .post(usersController.create);
+
+router.route('/users/:id')
+  .get(usersController.showUser)
+
+router.route('/users/:id/edit')
+  .get(usersController.edit)
+  .put(usersController.update)
+  .delete(usersController.remove);
 
 module.exports = router;
