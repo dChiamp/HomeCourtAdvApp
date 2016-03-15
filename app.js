@@ -6,12 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var methodOverride = require('method-override');
-
 var mongoose = require('mongoose');
-
 var passport = require('passport');
-
-var methodOverride = require('method-override');
+var expressSession = require('express-session');
 
 mongoose.connect('mongodb://localhost/HCA-app');
 process.on('exit', function(){mongoose.disconnect();});
@@ -20,6 +17,10 @@ var teamsController = require('./controllers/teamsController');
 // var usersController = require('./controllers/usersController');
 
 var routes = require('./config/routes');
+var passport = require('./config/passport.js');
+var passportMid = require('passport');
+var OAuth = require('./secrets');
+
 // var users = require('./routes/users');
 
 var app = express();
@@ -31,8 +32,10 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passportMid.initialize());
+app.use(passportMid.session());
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,7 +46,14 @@ app.use(methodOverride('_method'));
 
 app.use(routes);
 // app.use('/users', users);
+app.get('/auth/facebook', passport.facebookAuthenticate);
 
+app.get('/auth/facebook/callback',  passport.facebookCallback);
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
