@@ -54,14 +54,14 @@ Team.create(teams, function(err, teams){
       state: "CA",
       lat: 37.790230,
       long: -122.408439,
-      teams: [[teams[1]._id], 
-              [teams[2]._id]]
+      teams: [teams[1]._id, 
+              teams[2]._id]
     }
   ];
     Bar.create(bars, function(err, bars) {
       console.log("bars created:", bars);
+      mongoose.connection.close();
     });
-    // teams have been created
-    mongoose.connection.close();
+    // bars have been created
   }
 });
