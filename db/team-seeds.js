@@ -56,7 +56,6 @@ var users = [
   }
 ];
 
-
 Team.create(teams, function(err, teams){
   if (err) {
     console.log(err);

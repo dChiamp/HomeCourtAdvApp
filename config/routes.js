@@ -1,25 +1,23 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 // require our controllers
 var teamsController = require('../controllers/teamsController');
 var usersController = require('../controllers/usersController');
 var barsController = require('../controllers/barsController');
-
-console.log(teamsController);
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-//   res.render('index');
-// });
+var eventsController = require('../controllers/eventsController');
 
 // homepage routes
 router.route('/')
-  .get(teamsController.index);
+  .get(teamsController.indexTeams);
 
 // TEAM routes
 router.route('/teams/:id')
-  .get(teamsController.showTeam);
+  .get(teamsController.showTeam)
+  .get(eventsController.indexEvents);
+
 // router.route('/teams')
 //   .get(teamsController.index);
 
@@ -36,7 +34,7 @@ router.route('/users/:id')
 
 router.route('/users/:id/edit')
   .get(usersController.edit)
-  .put(usersController.update)
+  .post(usersController.update)
   .delete(usersController.remove);
 
 // BAR routes
