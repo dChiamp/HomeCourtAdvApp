@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 
 // require our controllers
 var teamsController = require('../controllers/teamsController');
 var usersController = require('../controllers/usersController');
 var barsController = require('../controllers/barsController');
+var eventsController = require('../controllers/eventsController');
 var loginController = require('../controllers/loginController');
 
 console.log(teamsController);
@@ -19,9 +22,16 @@ router.route('/')
   .get(teamsController.index)
   .get(usersController.checkLogInStatus);
 
+
+// homepage routes
+router.route('/')
+  .get(teamsController.indexTeams);
+
 // TEAM routes
 router.route('/teams/:id')
-  .get(teamsController.showTeam);
+  .get(teamsController.showTeam)
+  .get(eventsController.indexEvents);
+
 // router.route('/teams')
 //   .get(teamsController.index);
 
@@ -50,7 +60,7 @@ router.route('/users/:id')
 
 router.route('/users/:id/edit')
   .get(usersController.edit)
-  .put(usersController.update)
+  .post(usersController.update)
   .delete(usersController.remove);
 
 // BAR routes

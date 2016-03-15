@@ -12,12 +12,13 @@ var usersController = {
   },
   showUser: function (req, res) {
     var id = req.params.id;
-    User.find({_id: id}, function(err, user){
-      err ? console.log(err) : res.json({user});
+    User.findById({_id: id}, function(err, user){
+      // err ? console.log(err) : res.json({user});
+      err ? console.log(err) : res.render('users/show', {user: user});
     });
   },
   signUp: function(req, res) {
-    res.render('users/user-form');
+    res.render('users/user-new-form');
   },
   create: function(req, res) {
     var about = req.body.about;
@@ -27,18 +28,18 @@ var usersController = {
     User.create({about: about, picture: picture, favorites: favorites},
     function (err, data) {
       if (err) {
-        console.log(err)
+        console.log(err);
       } else {
-        res.json({data});
-        // res.redirect('/users/', _id);
-      }
+        res.redirect('/users');
+      }    
     });
   },
   edit: function (req, res) {
     // res.render("users/signup")
     var id = req.params.id;
-    User.find({_id: id}, function(err, user){
-      err ? console.log(err) : res.render('users/user-form', {user});
+    User.findById({_id: id}, function(err, user){
+      console.log(user);
+      err ? console.log(err) : res.render('users/user-edit-form', {user});
     });
   },
   update: function(req, res) {
@@ -48,23 +49,24 @@ var usersController = {
     var picture = req.body.picture;
     var favorites = req.body.favorites;
     // update
-
-    User.find({_id: id}, function(err, user){
+    User.findById(id, function(err, user){
       if (err) console.log(err);
       if (about) user.about = about;
       if (picture) user.picture = picture;
-      if  (favorites) user.favorites = favorites;
-    });
-
-    // this needs to save...
-    User.save(req.body, function(err, data){
-      console.log(err);
+      if (favorites) user.favorites = favorites;
+      console.log("user stuff here!:", user);
+      // this needs to save...
+      user.save(function(err, data){
+        console.log(err);
+        res.redirect('/users');
+      });
     });
   },
   remove: function(req, res) {
     var id = req.params.id;
     User.remove({_id: id}, function(err, data){
       if (err) console.log(err);
+      res.redirect('/');
     });
   }
 };
