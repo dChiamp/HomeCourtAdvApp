@@ -1,15 +1,17 @@
 // render a map
 
 // later this will be through team
-var barEndpoint = "/bars/56e73b39f8a139e04c05c9bf"
+var barEndpoint = "/bars"
 
 function getBarInfo () {
   $.getJSON(barEndpoint, function(data){
-    console.log(data);
-     barLat = data.bar[0].lat;
-     barLong = data.bar[0].long;
-    console.log("hey form getbarInfo");
-
+    bars = data;
+    for (var key in data) {
+      console.log(data[key][0].lat)
+    }
+     barLat = data.bars[0].lat;
+     barLong = data.bars[0].long;
+     // barCity = data.bar[0].city;
     new google.maps.Marker({
       position: new google.maps.LatLng(barLat, barLong),
       map: map,
