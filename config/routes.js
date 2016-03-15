@@ -22,11 +22,6 @@ router.route('/')
   // .get(usersController.checkLogInStatus, teamsController.index); //dont need to check login on home page
   .get(teamsController.indexTeams);
 
-
-// homepage routes
-router.route('/')
-  .get(teamsController.indexTeams);
-
 // TEAM routes
 router.route('/teams/:id')
   .get(teamsController.showTeam)
