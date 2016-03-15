@@ -1,8 +1,13 @@
 var mongoose = require('mongoose'),
         conn = mongoose.connect('mongodb://localhost/HCA-app'),
-        Team = require("../models/team");
+        Team = require("../models/team"),
+        Bar = require("../models/bar");
 
 Team.remove({}, function(err){
+  if (err) console.log("ERROR: ", err);
+});
+
+Bar.remove({}, function(err){
   if (err) console.log("ERROR: ", err);
 });
 
@@ -32,6 +37,31 @@ Team.create(teams, function(err, teams){
     console.log(err);
   } else {
     console.log("created: ", teams);
+  var bars = [
+    {
+      name: "beer garden",
+      address: "225 bush st",
+      city: "SF",
+      state: "CA",
+      lat: 37.790882,
+      long: -122.401552,
+      teams: [teams[0]._id]
+    },
+    {
+      name: "fear garden",
+      address: "666 death ave",
+      city: "San Francisco",
+      state: "CA",
+      lat: 37.790230,
+      long: -122.408439,
+      teams: [[teams[1]._id], 
+              [teams[2]._id]]
+    }
+  ];
+    Bar.create(bars, function(err, bars) {
+      console.log("bars created:", bars);
+    });
+    // teams have been created
     mongoose.connection.close();
   }
 });
