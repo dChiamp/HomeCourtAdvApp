@@ -5,7 +5,6 @@ var router = express.Router();
 var teamsController = require('../controllers/teamsController');
 var usersController = require('../controllers/usersController');
 var barsController = require('../controllers/barsController');
-var loginController = require('../controllers/loginController');
 
 console.log(teamsController);
 /* GET home page. */
@@ -16,27 +15,15 @@ console.log(teamsController);
 
 // homepage routes
 router.route('/')
-  .get(teamsController.index)
-  .get(usersController.checkLogInStatus);
+  // .get()
+  // .get(usersController.checkLogInStatus, teamsController.index); //dont need to check login on home page
+  .get(teamsController.index);
 
 // TEAM routes
 router.route('/teams/:id')
   .get(teamsController.showTeam);
-// router.route('/teams')
-//   .get(teamsController.index);
-
-//LOGIN routes
-
-router.route('/auth/facebook')
-  .get(loginController.authenticate)
-
-router.route('/auth/facebook/callback')
-  .get(loginController.callback)
-
-router.route('/logout')
-  .get(loginController.logout)
-
-
+router.route('/teams')
+  .get(teamsController.index);
 // USER routes // signup could just be edit
 router.route('/users')
   .get(usersController.index);

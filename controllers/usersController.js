@@ -2,9 +2,29 @@ var User = require('../models/user');
 
 var usersController = {
   // check if user is logged in
-  checkLogInStatus: function (req, res) {
-    res.render('index', {user: req.user});
+  checkLogInStatus: function (req, res, next) {
+    user = req.user;
+    if(req.user){
+      next();
+    } else {
+      res.redirect("/users/new");
+    }
+    // if(user){ // check if user is logged in
+    //   if(user.fb) { //check if user was logged in through facebook
+    //     // res.render('index', {user: user.fb, userID: user._id});
+    //     next();
+    //
+    //   }else if(user.google) {
+    //     // res.render('index', {user: user.google});
+    //     next();
+    //
+    //   }
+    // }else {
+    //   // res.render('index', {user: req.user});
+    //   next();
+    // }
   },
+
   index: function (req, res) {
     User.find({},function(err, users) {
       err ? console.log(err): res.json(users);
@@ -68,5 +88,7 @@ var usersController = {
     });
   }
 };
+
+
 
 module.exports = usersController;
