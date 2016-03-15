@@ -3,6 +3,14 @@ var Schema = mongoose.Schema;
 // var Team = require('../models/team')
 
 var UserSchema = new Schema ({
+
+    fb: {
+    id: String,
+    access_token: String,
+    firstName: String,
+    lastName: String,
+    email: String
+  },
     email: String,
     about: String,
     picture: String,
