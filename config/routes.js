@@ -19,8 +19,7 @@ console.log(teamsController);
 
 // homepage routes
 router.route('/')
-  .get(teamsController.index)
-  .get(usersController.checkLogInStatus);
+  .get(teamsController.index, usersController.checkLogInStatus);
 
 
 // homepage routes
