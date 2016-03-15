@@ -19,7 +19,7 @@ var teamsController = {
         err ? console.log(err) : res.render('index', {user: req.user,teams: teams});
     });
   },
-  //nav bar is dependent on this function in order to display teams index depending on what user does
+  //nav bar is dependent on this function in order to display teams depending on what user does
   showTeam: function(req,res) {
     var id = req.params.id;
     Team.find({}, function (err, teams){
